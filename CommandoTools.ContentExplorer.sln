@@ -3,6 +3,12 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{559C8FF5-0884-4C15-BFEC-BAC6CCD1C91C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FileFormats.Pak", "FileFormats.Pak", "{FECB6A3F-F1BB-4308-8EA5-5C7E24AA9D67}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommandoTools.ContentExplorer.FileFormats.Pak", "src\FileFormats.Pak\src\CommandoTools.ContentExplorer.FileFormats.Pak.csproj", "{7D997C5C-CC70-48AA-8471-A1C6E57A2441}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -10,5 +16,15 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7D997C5C-CC70-48AA-8471-A1C6E57A2441}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D997C5C-CC70-48AA-8471-A1C6E57A2441}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D997C5C-CC70-48AA-8471-A1C6E57A2441}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D997C5C-CC70-48AA-8471-A1C6E57A2441}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{FECB6A3F-F1BB-4308-8EA5-5C7E24AA9D67} = {559C8FF5-0884-4C15-BFEC-BAC6CCD1C91C}
+		{7D997C5C-CC70-48AA-8471-A1C6E57A2441} = {FECB6A3F-F1BB-4308-8EA5-5C7E24AA9D67}
 	EndGlobalSection
 EndGlobal
