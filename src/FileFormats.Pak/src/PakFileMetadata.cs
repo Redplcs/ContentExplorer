@@ -1,6 +1,5 @@
 ﻿namespace CommandoTools.ContentExplorer.FileFormats.Pak;
 
-public class Class1
+internal struct PakFileMetadata
 {
-
 }
