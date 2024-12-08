@@ -6,4 +6,10 @@
         xmlns:local="clr-namespace:CommandoTools.ContentExplorer.Application"
         mc:Ignorable="d"
         Title="ContentExplorer" Height="450" Width="800">
+    <DockPanel LastChildFill="True">
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="File"></MenuItem>
+            <MenuItem Header="Help"></MenuItem>
+        </Menu>
+    </DockPanel>
 </Window>
