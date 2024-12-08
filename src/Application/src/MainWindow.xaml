@@ -11,5 +11,15 @@
             <MenuItem Header="File"></MenuItem>
             <MenuItem Header="Help"></MenuItem>
         </Menu>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <TreeView Grid.Column="0"></TreeView>
+            <GridSplitter Grid.Column="1" Width="3" HorizontalAlignment="Stretch"></GridSplitter>
+            <ListView Grid.Column="2"></ListView>
+        </Grid>
     </DockPanel>
 </Window>
