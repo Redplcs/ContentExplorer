@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="ContentExplorer" Height="450" Width="800">
     <DockPanel LastChildFill="True">
-        <Menu DockPanel.Dock="Top">
+        <Menu DockPanel.Dock="Top" Padding="3">
             <MenuItem Header="File"></MenuItem>
             <MenuItem Header="Help"></MenuItem>
         </Menu>
