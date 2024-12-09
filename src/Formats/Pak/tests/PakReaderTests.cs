@@ -28,23 +28,12 @@ public class PakReaderTests
 		Assert.Throws<InvalidDataException>(Act);
 	}
 
-	[Fact]
-	public void PakReader_WhenFourthByteIsA_CompressionTypeIsNone()
+	[Theory]
+	[InlineData(0x41, PakCompressionType.None)]
+	[InlineData(0x43, PakCompressionType.Deflate)]
+	public void PakReader_WhenCompressionTypeDataEqualsRepresentation_CompressionTypeMustBeAsExpected(byte representation, PakCompressionType expectedCompressionType)
 	{
-		var expectedCompressionType = PakCompressionType.None;
-		using var stream = new MemoryStream(buffer: [0x50, 0x41, 0x4B, 0x41]);
-		var reader = new PakReader(stream);
-
-		var compressionType = reader.CompressionType;
-
-		Assert.Equal(expectedCompressionType, compressionType);
-	}
-
-	[Fact]
-	public void PakReader_WhenFourthByteIsC_CompressionTypeIsDeflate()
-	{
-		var expectedCompressionType = PakCompressionType.Deflate;
-		using var stream = new MemoryStream(buffer: [0x50, 0x41, 0x4B, 0x43]);
+		using var stream = new MemoryStream(buffer: [0x50, 0x41, 0x4B, representation, 0x0, 0x0, 0x0, 0x0]);
 		var reader = new PakReader(stream);
 
 		var compressionType = reader.CompressionType;
