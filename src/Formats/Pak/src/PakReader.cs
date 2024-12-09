@@ -14,17 +14,25 @@ public class PakReader : IDisposable
 
 		ThrowIfSignatureDoesNotMatch();
 
-		_compressionType = (PakCompressionType)_reader.ReadByte();
-		_version = (PakVersion)_reader.ReadInt32();
+		_compressionType = ReadCompressionType();
+		_version = ReadVersion();
 
 		// Skip unknown value that always 1.
 		// Even in the game this value does nothing.
 		_reader.BaseStream.Seek(4, SeekOrigin.Current);
 
-		_fileCount = _reader.ReadInt32();
+		_fileCount = ReadFileCount();
 	}
 
-	private void ThrowIfSignatureDoesNotMatch()
+	/// <summary>
+	/// For testing purposes
+	/// </summary>
+	internal PakReader(Stream archiveStream, bool dontRead)
+	{
+		_reader = new BinaryReader(archiveStream);
+	}
+
+	internal void ThrowIfSignatureDoesNotMatch()
 	{
 		Span<byte> buffer = stackalloc byte[PakHeader.Signature.Length];
 
@@ -38,6 +46,21 @@ public class PakReader : IDisposable
 			if (signatureByte != bufferByte)
 				throw new InvalidDataException("The signature does not match");
 		}
+	}
+
+	internal PakCompressionType ReadCompressionType()
+	{
+		return (PakCompressionType)_reader.ReadByte();
+	}
+
+	internal PakVersion ReadVersion()
+	{
+		return (PakVersion)_reader.ReadInt32();
+	}
+
+	internal int ReadFileCount()
+	{
+		return _reader.ReadInt32();
 	}
 
 	public PakCompressionType CompressionType => _compressionType;

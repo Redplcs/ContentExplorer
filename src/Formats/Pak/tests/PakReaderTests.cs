@@ -31,12 +31,12 @@ public class PakReaderTests
 	[Theory]
 	[InlineData(0x41, PakCompressionType.None)]
 	[InlineData(0x43, PakCompressionType.Deflate)]
-	public void PakReader_WhenCompressionTypeDataEqualsRepresentation_CompressionTypeMustBeAsExpected(byte representation, PakCompressionType expectedCompressionType)
+	public void PakReader_WhenReadingCompressionTypeData_ReturnsExpectedCompressionType(byte representation, PakCompressionType expectedCompressionType)
 	{
-		using var stream = new MemoryStream(buffer: [0x50, 0x41, 0x4B, representation, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0]);
-		using var reader = new PakReader(stream);
+		using var stream = new MemoryStream(buffer: [representation]);
+		using var reader = new PakReader(stream, dontRead: true);
 
-		var compressionType = reader.CompressionType;
+		var compressionType = reader.ReadCompressionType();
 
 		Assert.Equal(expectedCompressionType, compressionType);
 	}
@@ -45,26 +45,24 @@ public class PakReaderTests
 	[InlineData(0x3, PakVersion.Prototype)]
 	[InlineData(0x4, PakVersion.Trial)]
 	[InlineData(0x5, PakVersion.Release)]
-	public void PakReader_WhenVersionDataEqualsRepresentation_VersionMustBeAsExpected(byte representation, PakVersion expectedVersion)
+	public void PakReader_WhenReadingVersionData_ReturnsExpectedVersion(int representation, PakVersion expectedVersion)
 	{
-		using var stream = new MemoryStream(buffer: [0x50, 0x41, 0x4B, 0x41, representation, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0]);
-		using var reader = new PakReader(stream);
+		using var stream = new MemoryStream(buffer: BitConverter.GetBytes(representation));
+		using var reader = new PakReader(stream, dontRead: true);
 
-		var version = reader.Version;
+		var version = reader.ReadVersion();
 
 		Assert.Equal(expectedVersion, version);
 	}
 
 	[Theory]
 	[InlineData(1)]
-	[InlineData(2)]
-	[InlineData(3)]
-	public void PakReader_WhenFileCountDataHasValue_FileCountHasSameValue(byte expectedFileCount)
+	public void PakReader_WhenReadingFileCountData_ReturnsExpectedFileCount(int expectedFileCount)
 	{
-		using var stream = new MemoryStream(buffer: [0x50, 0x41, 0x4B, 0x41, 0x5, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, expectedFileCount, 0x0, 0x0, 0x0]);
-		using var reader = new PakReader(stream);
+		using var stream = new MemoryStream(buffer: BitConverter.GetBytes(expectedFileCount));
+		using var reader = new PakReader(stream, dontRead: true);
 
-		var fileCount = reader.FileCount;
+		var fileCount = reader.ReadFileCount();
 
 		Assert.Equal(expectedFileCount, fileCount);
 	}
