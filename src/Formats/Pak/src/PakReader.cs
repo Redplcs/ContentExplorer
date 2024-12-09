@@ -8,28 +8,30 @@ public class PakReader : IDisposable
 	private readonly int _fileCount;
 	private bool _disposed;
 
-	public PakReader(Stream archiveStream)
+	public PakReader(Stream archiveStream) : this(archiveStream, dontRead: false)
 	{
-		_reader = new BinaryReader(archiveStream);
-
-		ThrowIfSignatureDoesNotMatch();
-
-		_compressionType = ReadCompressionType();
-		_version = ReadVersion();
-
-		// Skip unknown value that always 1.
-		// Even in the game this value does nothing.
-		_reader.BaseStream.Seek(4, SeekOrigin.Current);
-
-		_fileCount = ReadFileCount();
 	}
 
 	/// <summary>
-	/// For testing purposes
+	/// For testing purposes.
 	/// </summary>
 	internal PakReader(Stream archiveStream, bool dontRead)
 	{
 		_reader = new BinaryReader(archiveStream);
+
+		if (!dontRead)
+		{
+			ThrowIfSignatureDoesNotMatch();
+
+			_compressionType = ReadCompressionType();
+			_version = ReadVersion();
+
+			// Skip unknown value that always 1.
+			// Even in the game this value does nothing.
+			_reader.BaseStream.Seek(4, SeekOrigin.Current);
+
+			_fileCount = ReadFileCount();
+		}
 	}
 
 	internal void ThrowIfSignatureDoesNotMatch()
