@@ -23,10 +23,8 @@ public sealed class PakEntry
 		}
 	}
 
-
 	public int Length
 	{
 		get => _metadata.Length;
-		set => _metadata.Length = value;
 	}
 }
