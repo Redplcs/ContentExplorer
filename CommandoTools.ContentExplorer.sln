@@ -19,6 +19,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Pak", "Pak", "{D323BFAA-883
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommandoTools.ContentExplorer.Formats.Pak", "src\Formats\Pak\src\CommandoTools.ContentExplorer.Formats.Pak.csproj", "{EC1BE5D0-9700-47BF-B2A5-F8760F0AE08A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommandoTools.ContentExplorer.Formats.Pak.Tests", "src\Formats\Pak\tests\CommandoTools.ContentExplorer.Formats.Pak.Tests.csproj", "{605106B1-72CA-4A66-85DB-7B00F991A1A1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -40,6 +42,10 @@ Global
 		{EC1BE5D0-9700-47BF-B2A5-F8760F0AE08A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EC1BE5D0-9700-47BF-B2A5-F8760F0AE08A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EC1BE5D0-9700-47BF-B2A5-F8760F0AE08A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{605106B1-72CA-4A66-85DB-7B00F991A1A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{605106B1-72CA-4A66-85DB-7B00F991A1A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{605106B1-72CA-4A66-85DB-7B00F991A1A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{605106B1-72CA-4A66-85DB-7B00F991A1A1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{39193706-6BE6-47E4-B16C-9AFD9C44FF39} = {82B8178C-DFAB-4E46-89AA-F371E58358B9}
@@ -49,5 +55,6 @@ Global
 		{05D02DC6-499D-4D9B-8C0C-C5AA18F3F044} = {82B8178C-DFAB-4E46-89AA-F371E58358B9}
 		{D323BFAA-883A-478E-8A20-5D1B545EE15D} = {05D02DC6-499D-4D9B-8C0C-C5AA18F3F044}
 		{EC1BE5D0-9700-47BF-B2A5-F8760F0AE08A} = {D323BFAA-883A-478E-8A20-5D1B545EE15D}
+		{605106B1-72CA-4A66-85DB-7B00F991A1A1} = {D323BFAA-883A-478E-8A20-5D1B545EE15D}
 	EndGlobalSection
 EndGlobal
