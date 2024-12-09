@@ -9,6 +9,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommandoTools.ContentExplorer.Application", "src\Application\src\CommandoTools.ContentExplorer.Application.csproj", "{395E5BDE-1F62-4091-8354-68538CFA7FD3}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{6EE58A43-A8B9-4A2F-B13F-1614A8B058AA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommandoTools.ContentExplorer.Domain", "src\Domain\src\CommandoTools.ContentExplorer.Domain.csproj", "{E5CFA96A-EC60-4A88-BE17-1D86F75A8315}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -22,9 +26,15 @@ Global
 		{395E5BDE-1F62-4091-8354-68538CFA7FD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{395E5BDE-1F62-4091-8354-68538CFA7FD3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{395E5BDE-1F62-4091-8354-68538CFA7FD3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E5CFA96A-EC60-4A88-BE17-1D86F75A8315}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E5CFA96A-EC60-4A88-BE17-1D86F75A8315}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E5CFA96A-EC60-4A88-BE17-1D86F75A8315}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E5CFA96A-EC60-4A88-BE17-1D86F75A8315}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{39193706-6BE6-47E4-B16C-9AFD9C44FF39} = {82B8178C-DFAB-4E46-89AA-F371E58358B9}
 		{395E5BDE-1F62-4091-8354-68538CFA7FD3} = {39193706-6BE6-47E4-B16C-9AFD9C44FF39}
+		{6EE58A43-A8B9-4A2F-B13F-1614A8B058AA} = {82B8178C-DFAB-4E46-89AA-F371E58358B9}
+		{E5CFA96A-EC60-4A88-BE17-1D86F75A8315} = {6EE58A43-A8B9-4A2F-B13F-1614A8B058AA}
 	EndGlobalSection
 EndGlobal
