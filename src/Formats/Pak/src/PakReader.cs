@@ -6,6 +6,7 @@ public class PakReader : IDisposable
 	private readonly PakCompressionType _compressionType;
 	private readonly PakVersion _version;
 	private readonly int _fileCount;
+	private readonly PakFileMetadata[] _metadata;
 	private bool _disposed;
 
 	public PakReader(Stream archiveStream) : this(archiveStream, dontRead: false)
@@ -31,6 +32,12 @@ public class PakReader : IDisposable
 			_reader.BaseStream.Seek(4, SeekOrigin.Current);
 
 			_fileCount = ReadFileCount();
+			_metadata = new PakFileMetadata[_fileCount];
+
+			for (var i = 0; i < _fileCount; i++)
+			{
+				_metadata[i] = ReadFileMetadata();
+			}
 		}
 	}
 
