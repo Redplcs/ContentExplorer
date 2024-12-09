@@ -14,4 +14,17 @@ public class PakReaderTests
 
 		Assert.Throws<InvalidDataException>(Act);
 	}
+
+	[Fact]
+	public void PakReader_WhenStreamIsSmallerThanSignature_ThrowsInvalidDataException()
+	{
+		using var stream = new MemoryStream(buffer: [ 0x50 ]);
+
+		void Act()
+		{
+			var reader = new PakReader(stream);
+		}
+
+		Assert.Throws<InvalidDataException>(Act);
+	}
 }
