@@ -5,6 +5,7 @@ public class PakReader
 	private readonly BinaryReader _reader;
 	private readonly PakCompressionType _compressionType;
 	private readonly PakVersion _version;
+	private readonly int _fileCount;
 
 	public PakReader(Stream archiveStream)
 	{
@@ -18,6 +19,8 @@ public class PakReader
 		// Skip unknown value that always 1.
 		// Even in the game this value does nothing.
 		_reader.BaseStream.Seek(4, SeekOrigin.Current);
+
+		_fileCount = _reader.ReadInt32();
 	}
 
 	private void ThrowIfSignatureDoesNotMatch()
@@ -38,4 +41,5 @@ public class PakReader
 
 	public PakCompressionType CompressionType => _compressionType;
 	public PakVersion Version => _version;
+	public int FileCount => _fileCount;
 }
