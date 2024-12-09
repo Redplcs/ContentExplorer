@@ -33,7 +33,7 @@ public class PakReaderTests
 	[InlineData(0x43, PakCompressionType.Deflate)]
 	public void PakReader_WhenCompressionTypeDataEqualsRepresentation_CompressionTypeMustBeAsExpected(byte representation, PakCompressionType expectedCompressionType)
 	{
-		using var stream = new MemoryStream(buffer: [0x50, 0x41, 0x4B, representation, 0x0, 0x0, 0x0, 0x0]);
+		using var stream = new MemoryStream(buffer: [0x50, 0x41, 0x4B, representation, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0]);
 		var reader = new PakReader(stream);
 
 		var compressionType = reader.CompressionType;
@@ -47,7 +47,7 @@ public class PakReaderTests
 	[InlineData(0x5, PakVersion.Release)]
 	public void PakReader_WhenVersionDataEqualsRepresentation_VersionMustBeAsExpected(byte representation, PakVersion expectedVersion)
 	{
-		using var stream = new MemoryStream(buffer: [0x50, 0x41, 0x4B, 0x41, representation, 0x0, 0x0, 0x0]);
+		using var stream = new MemoryStream(buffer: [0x50, 0x41, 0x4B, 0x41, representation, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0]);
 		var reader = new PakReader(stream);
 
 		var version = reader.Version;

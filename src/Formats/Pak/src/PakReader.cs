@@ -14,6 +14,10 @@ public class PakReader
 
 		_compressionType = (PakCompressionType)_reader.ReadByte();
 		_version = (PakVersion)_reader.ReadInt32();
+
+		// Skip unknown value that always 1.
+		// Even in the game this value does nothing.
+		_reader.BaseStream.Seek(4, SeekOrigin.Current);
 	}
 
 	private void ThrowIfSignatureDoesNotMatch()
