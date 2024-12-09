@@ -39,4 +39,16 @@ public class PakReaderTests
 
 		Assert.Equal(expectedCompressionType, compressionType);
 	}
+
+	[Fact]
+	public void PakReader_WhenFourthByteIsC_CompressionTypeIsDeflate()
+	{
+		var expectedCompressionType = PakCompressionType.Deflate;
+		using var stream = new MemoryStream(buffer: [0x50, 0x41, 0x4B, 0x43]);
+		var reader = new PakReader(stream);
+
+		var compressionType = reader.CompressionType;
+
+		Assert.Equal(expectedCompressionType, compressionType);
+	}
 }
