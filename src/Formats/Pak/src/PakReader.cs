@@ -4,6 +4,7 @@ public class PakReader
 {
 	private readonly BinaryReader _reader;
 	private readonly PakCompressionType _compressionType;
+	private readonly PakVersion _version;
 
 	public PakReader(Stream archiveStream)
 	{
@@ -12,6 +13,7 @@ public class PakReader
 		ThrowIfSignatureDoesNotMatch();
 
 		_compressionType = (PakCompressionType)_reader.ReadByte();
+		_version = (PakVersion)_reader.ReadInt32();
 	}
 
 	private void ThrowIfSignatureDoesNotMatch()
@@ -31,4 +33,5 @@ public class PakReader
 	}
 
 	public PakCompressionType CompressionType => _compressionType;
+	public PakVersion Version => _version;
 }

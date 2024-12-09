@@ -51,4 +51,18 @@ public class PakReaderTests
 
 		Assert.Equal(expectedCompressionType, compressionType);
 	}
+
+	[Theory]
+	[InlineData(0x3, PakVersion.Prototype)]
+	[InlineData(0x4, PakVersion.Trial)]
+	[InlineData(0x5, PakVersion.Release)]
+	public void PakReader_WhenVersionDataEqualsRepresentation_VersionMustBeAsExpected(byte representation, PakVersion expectedVersion)
+	{
+		using var stream = new MemoryStream(buffer: [0x50, 0x41, 0x4B, 0x41, representation, 0x0, 0x0, 0x0]);
+		var reader = new PakReader(stream);
+
+		var version = reader.Version;
+
+		Assert.Equal(expectedVersion, version);
+	}
 }
