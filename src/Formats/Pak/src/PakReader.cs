@@ -3,12 +3,15 @@
 public class PakReader
 {
 	private readonly BinaryReader _reader;
+	private readonly PakCompressionType _compressionType;
 
 	public PakReader(Stream archiveStream)
 	{
 		_reader = new BinaryReader(archiveStream);
 
 		ThrowIfSignatureDoesNotMatch();
+
+		_compressionType = (PakCompressionType)_reader.ReadByte();
 	}
 
 	private void ThrowIfSignatureDoesNotMatch()
@@ -26,4 +29,6 @@ public class PakReader
 				throw new InvalidDataException("The signature does not match");
 		}
 	}
+
+	public PakCompressionType CompressionType => _compressionType;
 }
