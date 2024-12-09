@@ -1,11 +1,12 @@
 ﻿namespace CommandoTools.ContentExplorer.Formats.Pak;
 
-public class PakReader
+public class PakReader : IDisposable
 {
 	private readonly BinaryReader _reader;
 	private readonly PakCompressionType _compressionType;
 	private readonly PakVersion _version;
 	private readonly int _fileCount;
+	private bool _disposed;
 
 	public PakReader(Stream archiveStream)
 	{
@@ -42,4 +43,23 @@ public class PakReader
 	public PakCompressionType CompressionType => _compressionType;
 	public PakVersion Version => _version;
 	public int FileCount => _fileCount;
+
+	protected virtual void Dispose(bool disposing)
+	{
+		if (!_disposed)
+		{
+			if (disposing)
+			{
+				_reader.Dispose();
+			}
+
+			_disposed = true;
+		}
+	}
+
+	public void Dispose()
+	{
+		GC.SuppressFinalize(this);
+		Dispose(disposing: true);
+	}
 }

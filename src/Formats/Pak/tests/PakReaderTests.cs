@@ -34,7 +34,7 @@ public class PakReaderTests
 	public void PakReader_WhenCompressionTypeDataEqualsRepresentation_CompressionTypeMustBeAsExpected(byte representation, PakCompressionType expectedCompressionType)
 	{
 		using var stream = new MemoryStream(buffer: [0x50, 0x41, 0x4B, representation, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0]);
-		var reader = new PakReader(stream);
+		using var reader = new PakReader(stream);
 
 		var compressionType = reader.CompressionType;
 
@@ -48,7 +48,7 @@ public class PakReaderTests
 	public void PakReader_WhenVersionDataEqualsRepresentation_VersionMustBeAsExpected(byte representation, PakVersion expectedVersion)
 	{
 		using var stream = new MemoryStream(buffer: [0x50, 0x41, 0x4B, 0x41, representation, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0]);
-		var reader = new PakReader(stream);
+		using var reader = new PakReader(stream);
 
 		var version = reader.Version;
 
@@ -62,7 +62,7 @@ public class PakReaderTests
 	public void PakReader_WhenFileCountDataHasValue_FileCountHasSameValue(byte expectedFileCount)
 	{
 		using var stream = new MemoryStream(buffer: [0x50, 0x41, 0x4B, 0x41, 0x5, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, expectedFileCount, 0x0, 0x0, 0x0]);
-		var reader = new PakReader(stream);
+		using var reader = new PakReader(stream);
 
 		var fileCount = reader.FileCount;
 
