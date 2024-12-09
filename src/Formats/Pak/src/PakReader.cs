@@ -1,6 +1,5 @@
 ﻿namespace CommandoTools.ContentExplorer.Formats.Pak;
 
-public class Class1
+public class PakReader
 {
-
 }
