@@ -66,4 +66,22 @@ public class PakReaderTests
 
 		Assert.Equal(expectedFileCount, fileCount);
 	}
+
+	[Fact]
+	public void PakReader_WhenReadingFileMetadataData_ReturnsExpectedFileMetadata()
+	{
+		var expectedMetadata = new PakFileMetadata
+		{
+			Path = "FILE.DATA",
+			DataOffset = 0,
+			Length = 256,
+			Unknown = 0,
+		};
+		using var stream = new MemoryStream(buffer: Helper.FileMetadataToBytes(expectedMetadata));
+		using var reader = new PakReader(stream, dontRead: true);
+
+		var metadata = reader.ReadFileMetadata();
+
+		Assert.Equal(expectedMetadata, metadata);
+	}
 }

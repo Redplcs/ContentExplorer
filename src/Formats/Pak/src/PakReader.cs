@@ -65,6 +65,17 @@ public class PakReader : IDisposable
 		return _reader.ReadInt32();
 	}
 
+	internal PakFileMetadata ReadFileMetadata()
+	{
+		return new PakFileMetadata
+		{
+			Path = _reader.ReadNullTerminatedString(),
+			DataOffset = _reader.ReadInt32(),
+			Length = _reader.ReadInt32(),
+			Unknown = _reader.ReadUInt64(),
+		};
+	}
+
 	public PakCompressionType CompressionType => _compressionType;
 	public PakVersion Version => _version;
 	public int FileCount => _fileCount;
