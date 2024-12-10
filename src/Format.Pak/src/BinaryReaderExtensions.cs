@@ -10,7 +10,7 @@ internal static class BinaryReaderExtensions
 	{
 		s_stringBuilder.Clear();
 
-		for (var character = reader.Read(); character is not '\0' or -1; character = reader.Read())
+		for (var character = reader.Read(); character is not 0 and not -1; character = reader.Read())
 		{
 			s_stringBuilder.Append((char)character);
 		}
