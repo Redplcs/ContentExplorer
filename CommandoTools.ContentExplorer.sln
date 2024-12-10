@@ -3,6 +3,12 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{CF529364-5350-4E07-9DC2-FBF228D113D3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Format.Pak", "Format.Pak", "{01709E85-F5FA-4DFA-BA35-77E2C9DB1EA5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommandoTools.ContentExplorer.Format.Pak", "src\Format.Pak\src\CommandoTools.ContentExplorer.Format.Pak.csproj", "{0C2F82CF-7EC9-45CA-B21C-6E16D84D40B1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -10,5 +16,15 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0C2F82CF-7EC9-45CA-B21C-6E16D84D40B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C2F82CF-7EC9-45CA-B21C-6E16D84D40B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C2F82CF-7EC9-45CA-B21C-6E16D84D40B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C2F82CF-7EC9-45CA-B21C-6E16D84D40B1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{01709E85-F5FA-4DFA-BA35-77E2C9DB1EA5} = {CF529364-5350-4E07-9DC2-FBF228D113D3}
+		{0C2F82CF-7EC9-45CA-B21C-6E16D84D40B1} = {01709E85-F5FA-4DFA-BA35-77E2C9DB1EA5}
 	EndGlobalSection
 EndGlobal
