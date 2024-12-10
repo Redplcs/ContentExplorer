@@ -10,6 +10,7 @@ public sealed class PakReader : IDisposable
 	private readonly BinaryReader _binaryReader;
 	private readonly PakCompressionType _compressionType;
 	private readonly PakVersion _version;
+	private readonly int _fileCount;
 
 	public PakReader(Stream archiveStream)
 	{
@@ -22,6 +23,8 @@ public sealed class PakReader : IDisposable
 
 		var unknown = _binaryReader.ReadInt32();
 		Debug.Assert(unknown == 1, "Usually this value is always 1");
+
+		_fileCount = _binaryReader.ReadInt32();
 	}
 
 	private void ThrowIfSignatureDoesNotMatch()
@@ -44,6 +47,7 @@ public sealed class PakReader : IDisposable
 
 	public PakCompressionType CompressionType => _compressionType;
 	public PakVersion Version => _version;
+	public int FileCount => _fileCount;
 
 	public void Dispose()
 	{

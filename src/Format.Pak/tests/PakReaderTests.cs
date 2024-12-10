@@ -1,4 +1,6 @@
-﻿namespace CommandoTools.ContentExplorer.Format.Pak.Tests;
+﻿using System.Runtime.InteropServices;
+
+namespace CommandoTools.ContentExplorer.Format.Pak.Tests;
 
 public class PakReaderTests
 {
@@ -42,9 +44,21 @@ public class PakReaderTests
 		Assert.Equal(expectedVersion, version);
 	}
 
-	private static byte[] GetBytesFromHeader(PakCompressionType compressionType = PakCompressionType.None, PakVersion version = PakVersion.None)
+	[Theory]
+	[InlineData(1)]
+	public void PakReader_WhenReadingFileCountData_FileCountIsAsExpected(int expectedFileCount)
 	{
-		var buffer = new byte[12];
+		using var stream = new MemoryStream(buffer: GetBytesFromHeader(fileCount: expectedFileCount));
+		using var reader = new PakReader(stream);
+
+		var fileCount = reader.FileCount;
+
+		Assert.Equal(expectedFileCount, fileCount);
+	}
+
+	private static byte[] GetBytesFromHeader(PakCompressionType compressionType = PakCompressionType.None, PakVersion version = PakVersion.None, int fileCount = 0)
+	{
+		var buffer = new byte[16];
 
 		buffer[0] = (byte)'P';
 		buffer[1] = (byte)'A';
@@ -58,6 +72,8 @@ public class PakReaderTests
 		buffer[9] = 0;
 		buffer[10] = 0;
 		buffer[11] = 0;
+
+		MemoryMarshal.Write(buffer.AsSpan()[12..], fileCount);
 
 		return buffer;
 	}
