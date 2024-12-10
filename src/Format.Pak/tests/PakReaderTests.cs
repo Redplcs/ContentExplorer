@@ -55,4 +55,19 @@ public class PakReaderTests
 
 		Assert.Equal(expectedFileCount, fileCount);
 	}
+
+	[Fact]
+	public void PakReader_WhenReadingMetadataBlock_MetadataIsSingle()
+	{
+		var metadata = new PakFileMetadata
+		{
+			Path = "FILE.DATA",
+			Length = 512,
+			Unknown = 123123,
+		};
+		using var stream = new MemoryStream(TestingHeaderBytes.BuildBytes(metadata));
+		using var reader = new PakReader(stream);
+
+		Assert.Single(reader.Metadata);
+	}
 }
