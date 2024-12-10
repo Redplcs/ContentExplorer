@@ -7,12 +7,15 @@ public class PakReader
 	private static readonly ImmutableArray<byte> s_signature = "PAK"u8.ToImmutableArray();
 
 	private readonly BinaryReader _binaryReader;
+	private readonly PakCompressionType _compressionType;
 
 	public PakReader(Stream archiveStream)
 	{
 		_binaryReader = new BinaryReader(archiveStream);
 
 		ThrowIfSignatureDoesNotMatch();
+
+		_compressionType = (PakCompressionType)_binaryReader.ReadByte();
 	}
 
 	private void ThrowIfSignatureDoesNotMatch()
@@ -32,4 +35,6 @@ public class PakReader
 			}
 		}
 	}
+
+	public PakCompressionType CompressionType => _compressionType;
 }
