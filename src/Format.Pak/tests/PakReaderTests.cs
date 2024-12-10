@@ -7,7 +7,7 @@ public class PakReaderTests
 	[Fact]
 	public void PakReader_WhenSignatureDoesNotMatch_ThrowsInvalidDataException()
 	{
-		using var stream = new MemoryStream(buffer: [0xFF, 0xFF, 0xFF]);
+		using var stream = new MemoryStream(TestingHeaderBytes.InvalidSignature);
 
 		void Act()
 		{
@@ -22,7 +22,7 @@ public class PakReaderTests
 	[InlineData(PakCompressionType.Deflate)]
 	public void PakReader_WhenReadingCompressionTypeData_CompressionTypeIsAsExpected(PakCompressionType expectedCompressionType)
 	{
-		using var stream = new MemoryStream(buffer: GetBytesFromHeader(compressionType: expectedCompressionType));
+		using var stream = new MemoryStream(TestingHeaderBytes.BuildBytes(expectedCompressionType));
 		using var reader = new PakReader(stream);
 
 		var compressionType = reader.CompressionType;
@@ -36,7 +36,7 @@ public class PakReaderTests
 	[InlineData(PakVersion.Release)]
 	public void PakReader_WhenReadingVersionData_VersionIsAsExpected(PakVersion expectedVersion)
 	{
-		using var stream = new MemoryStream(buffer: GetBytesFromHeader(version: expectedVersion));
+		using var stream = new MemoryStream(TestingHeaderBytes.BuildBytes(expectedVersion));
 		using var reader = new PakReader(stream);
 
 		var version = reader.Version;
@@ -48,33 +48,11 @@ public class PakReaderTests
 	[InlineData(1)]
 	public void PakReader_WhenReadingFileCountData_FileCountIsAsExpected(int expectedFileCount)
 	{
-		using var stream = new MemoryStream(buffer: GetBytesFromHeader(fileCount: expectedFileCount));
+		using var stream = new MemoryStream(TestingHeaderBytes.BuildBytes(expectedFileCount));
 		using var reader = new PakReader(stream);
 
 		var fileCount = reader.FileCount;
 
 		Assert.Equal(expectedFileCount, fileCount);
-	}
-
-	private static byte[] GetBytesFromHeader(PakCompressionType compressionType = PakCompressionType.None, PakVersion version = PakVersion.None, int fileCount = 0)
-	{
-		var buffer = new byte[16];
-
-		buffer[0] = (byte)'P';
-		buffer[1] = (byte)'A';
-		buffer[2] = (byte)'K';
-		buffer[3] = (byte)compressionType;
-		buffer[4] = (byte)version;
-		buffer[5] = 0;
-		buffer[6] = 0;
-		buffer[7] = 0;
-		buffer[8] = 1;
-		buffer[9] = 0;
-		buffer[10] = 0;
-		buffer[11] = 0;
-
-		MemoryMarshal.Write(buffer.AsSpan()[12..], fileCount);
-
-		return buffer;
 	}
 }
