@@ -7,6 +7,7 @@ public class PakReader : IDisposable
 	private readonly PakVersion _version;
 	private readonly int _fileCount;
 	private readonly PakFileMetadata[] _metadata;
+	private int _entryIndex;
 	private bool _disposed;
 
 	public PakReader(Stream archiveStream) : this(archiveStream, dontRead: false)
@@ -86,6 +87,15 @@ public class PakReader : IDisposable
 	public PakCompressionType CompressionType => _compressionType;
 	public PakVersion Version => _version;
 	public int FileCount => _fileCount;
+
+	public PakEntry GetNextEntry()
+	{
+		var metadata = _metadata[_entryIndex];
+
+		_entryIndex++;
+
+		return new PakEntry(metadata);
+	}
 
 	protected virtual void Dispose(bool disposing)
 	{

@@ -9,7 +9,7 @@ public sealed class PakEntry
 	/// </summary>
 	internal PakEntry(PakFileMetadata metadata = default)
 	{
-
+		_metadata = metadata;
 	}
 
 	public string Path
