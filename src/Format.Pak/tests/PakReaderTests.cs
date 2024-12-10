@@ -44,7 +44,7 @@ public class PakReaderTests
 
 	private static byte[] GetBytesFromHeader(PakCompressionType compressionType = PakCompressionType.None, PakVersion version = PakVersion.None)
 	{
-		var buffer = new byte[8];
+		var buffer = new byte[12];
 
 		buffer[0] = (byte)'P';
 		buffer[1] = (byte)'A';
@@ -54,6 +54,10 @@ public class PakReaderTests
 		buffer[5] = 0;
 		buffer[6] = 0;
 		buffer[7] = 0;
+		buffer[8] = 1;
+		buffer[9] = 0;
+		buffer[10] = 0;
+		buffer[11] = 0;
 
 		return buffer;
 	}

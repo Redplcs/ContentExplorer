@@ -1,4 +1,5 @@
 ﻿using System.Collections.Immutable;
+using System.Diagnostics;
 
 namespace CommandoTools.ContentExplorer.Format.Pak;
 
@@ -18,6 +19,9 @@ public sealed class PakReader : IDisposable
 
 		_compressionType = (PakCompressionType)_binaryReader.ReadByte();
 		_version = (PakVersion)_binaryReader.ReadInt32();
+
+		var unknown = _binaryReader.ReadInt32();
+		Debug.Assert(unknown == 1, "Usually this value is always 1");
 	}
 
 	private void ThrowIfSignatureDoesNotMatch()
