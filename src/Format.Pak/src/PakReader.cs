@@ -8,6 +8,7 @@ public sealed class PakReader : IDisposable
 
 	private readonly BinaryReader _binaryReader;
 	private readonly PakCompressionType _compressionType;
+	private readonly PakVersion _version;
 
 	public PakReader(Stream archiveStream)
 	{
@@ -16,6 +17,7 @@ public sealed class PakReader : IDisposable
 		ThrowIfSignatureDoesNotMatch();
 
 		_compressionType = (PakCompressionType)_binaryReader.ReadByte();
+		_version = (PakVersion)_binaryReader.ReadInt32();
 	}
 
 	private void ThrowIfSignatureDoesNotMatch()
@@ -37,6 +39,7 @@ public sealed class PakReader : IDisposable
 	}
 
 	public PakCompressionType CompressionType => _compressionType;
+	public PakVersion Version => _version;
 
 	public void Dispose()
 	{

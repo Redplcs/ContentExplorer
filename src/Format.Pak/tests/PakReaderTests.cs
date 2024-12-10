@@ -20,7 +20,7 @@ public class PakReaderTests
 	[InlineData(PakCompressionType.Deflate)]
 	public void PakReader_WhenReadingCompressionTypeData_CompressionTypeIsAsExpected(PakCompressionType expectedCompressionType)
 	{
-		using var stream = new MemoryStream(buffer: GetBytesFromHeader(expectedCompressionType));
+		using var stream = new MemoryStream(buffer: GetBytesFromHeader(compressionType: expectedCompressionType));
 		using var reader = new PakReader(stream);
 
 		var compressionType = reader.CompressionType;
@@ -28,14 +28,32 @@ public class PakReaderTests
 		Assert.Equal(expectedCompressionType, compressionType);
 	}
 
-	private static byte[] GetBytesFromHeader(PakCompressionType compressionType)
+	[Theory]
+	[InlineData(PakVersion.Prototype)]
+	[InlineData(PakVersion.Trial)]
+	[InlineData(PakVersion.Release)]
+	public void PakReader_WhenReadingVersionData_VersionIsAsExpected(PakVersion expectedVersion)
 	{
-		var buffer = new byte[4];
+		using var stream = new MemoryStream(buffer: GetBytesFromHeader(version: expectedVersion));
+		using var reader = new PakReader(stream);
+
+		var version = reader.Version;
+
+		Assert.Equal(expectedVersion, version);
+	}
+
+	private static byte[] GetBytesFromHeader(PakCompressionType compressionType = PakCompressionType.None, PakVersion version = PakVersion.None)
+	{
+		var buffer = new byte[8];
 
 		buffer[0] = (byte)'P';
 		buffer[1] = (byte)'A';
 		buffer[2] = (byte)'K';
 		buffer[3] = (byte)compressionType;
+		buffer[4] = (byte)version;
+		buffer[5] = 0;
+		buffer[6] = 0;
+		buffer[7] = 0;
 
 		return buffer;
 	}
