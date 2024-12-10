@@ -1,6 +1,4 @@
-﻿using System.Runtime.InteropServices;
-
-namespace CommandoTools.ContentExplorer.Format.Pak.Tests;
+﻿namespace CommandoTools.ContentExplorer.Format.Pak.Tests;
 
 public class PakReaderTests
 {
@@ -69,5 +67,22 @@ public class PakReaderTests
 		using var reader = new PakReader(stream);
 
 		Assert.Single(reader.Metadata);
+	}
+
+	[Fact]
+	public void GetNextEntry_WhenCallingMoreThanFileCount_ThrowsInvalidOperationException()
+	{
+		using var stream = new MemoryStream(TestingHeaderBytes.BuildBytes(fileCount: 3));
+		using var reader = new PakReader(stream);
+		Act();
+		Act();
+		Act();
+
+		void Act()
+		{
+			reader.GetNextEntry();
+		}
+
+		Assert.Throws<InvalidOperationException>(Act);
 	}
 }

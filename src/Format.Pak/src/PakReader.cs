@@ -12,6 +12,7 @@ public sealed class PakReader : IDisposable
 	private readonly PakVersion _version;
 	private readonly int _fileCount;
 	private readonly PakFileMetadata[] _metadata;
+	private int _entryIndex;
 
 	public PakReader(Stream archiveStream)
 	{
@@ -63,6 +64,18 @@ public sealed class PakReader : IDisposable
 	public int FileCount => _fileCount;
 
 	internal PakFileMetadata[] Metadata => _metadata;
+
+	public PakEntry GetNextEntry()
+	{
+		if (_entryIndex >= _fileCount)
+		{
+			throw new InvalidOperationException("There is no remaining entries");
+		}
+
+		_entryIndex++;
+
+		return default!;
+	}
 
 	public void Dispose()
 	{
