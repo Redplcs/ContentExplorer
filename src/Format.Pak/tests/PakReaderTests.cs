@@ -21,7 +21,7 @@ public class PakReaderTests
 	public void PakReader_WhenReadingCompressionTypeData_CompressionTypeIsAsExpected(PakCompressionType expectedCompressionType)
 	{
 		using var stream = new MemoryStream(buffer: GetBytesFromHeader(expectedCompressionType));
-		var reader = new PakReader(stream);
+		using var reader = new PakReader(stream);
 
 		var compressionType = reader.CompressionType;
 

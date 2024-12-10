@@ -2,7 +2,7 @@
 
 namespace CommandoTools.ContentExplorer.Format.Pak;
 
-public class PakReader
+public sealed class PakReader : IDisposable
 {
 	private static readonly ImmutableArray<byte> s_signature = "PAK"u8.ToImmutableArray();
 
@@ -37,4 +37,9 @@ public class PakReader
 	}
 
 	public PakCompressionType CompressionType => _compressionType;
+
+	public void Dispose()
+	{
+		_binaryReader.Dispose();
+	}
 }
