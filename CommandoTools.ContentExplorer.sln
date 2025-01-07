@@ -3,6 +3,12 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{CDC15697-E4B6-40BD-BC3F-B895CD814384}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Wpf", "Wpf", "{86CDFDC4-C3F4-46B8-B5F4-545637B4F3F6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommandoTools.ContentExplorer.Wpf", "src\Wpf\src\CommandoTools.ContentExplorer.Wpf.csproj", "{222612FC-5954-4712-8FB7-1E91362E3982}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -10,5 +16,15 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{222612FC-5954-4712-8FB7-1E91362E3982}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{222612FC-5954-4712-8FB7-1E91362E3982}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{222612FC-5954-4712-8FB7-1E91362E3982}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{222612FC-5954-4712-8FB7-1E91362E3982}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{86CDFDC4-C3F4-46B8-B5F4-545637B4F3F6} = {CDC15697-E4B6-40BD-BC3F-B895CD814384}
+		{222612FC-5954-4712-8FB7-1E91362E3982} = {86CDFDC4-C3F4-46B8-B5F4-545637B4F3F6}
 	EndGlobalSection
 EndGlobal
